@@ -138,18 +138,18 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
   </section>
 
   <form id="form" novalidate>
-    <fieldset class="step" data-key="sterne" data-auto="1" data-required="1" hidden>
+    <fieldset class="step" data-key="sterne" data-required="1" hidden>
       <legend tabindex="-1"><span class="qn">Frage 1</span><span class="qt words">Wie hat dir der Abend gefallen?</span><span class="hint">Tippe auf 1 bis 5 Sterne</span></legend>
       <div class="stars" id="stars" role="radiogroup" aria-label="Sterne von 1 bis 5"></div>
       <p class="starnote" id="starNote" aria-live="polite"></p>
     </fieldset>
 
-    <fieldset class="step" data-key="nutzen" data-auto="1" hidden>
+    <fieldset class="step" data-key="nutzen" hidden>
       <legend tabindex="-1"><span class="qn">Frage 2</span><span class="qt words">Wie nützlich war der Inhalt für deine Vereinsarbeit?</span></legend>
       <div class="opts" data-type="radio" data-name="nutzen" data-options="Sehr|Ziemlich|Wenig|Gar nicht"></div>
     </fieldset>
 
-    <fieldset class="step" data-key="tempo" data-auto="1" hidden>
+    <fieldset class="step" data-key="tempo" hidden>
       <legend tabindex="-1"><span class="qn">Frage 3</span><span class="qt words">Wie war das Tempo?</span></legend>
       <div class="opts" data-type="radio" data-name="tempo" data-options="Zu langsam|Genau richtig|Zu schnell"></div>
     </fieldset>
@@ -159,12 +159,12 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
       <div class="opts" data-type="checkbox" data-name="ausprobieren" data-options="Einladungen und Briefe|Protokolle|Social Media|Fördergesuche und Sponsoring|Bilder und Flyer|Eventplanung|Noch nichts"></div>
     </fieldset>
 
-    <fieldset class="step" data-key="rolle" data-auto="1" hidden>
+    <fieldset class="step" data-key="rolle" hidden>
       <legend tabindex="-1"><span class="qn">Frage 5</span><span class="qt words">Welche Rolle hast du im Verein?</span></legend>
       <div class="opts" data-type="radio" data-name="rolle" data-options="Präsidium|Kasse|Aktuariat|Training oder Leitung|Vorstand, andere Funktion|Mitglied"></div>
     </fieldset>
 
-    <fieldset class="step" data-key="folge" data-auto="1" hidden>
+    <fieldset class="step" data-key="folge" hidden>
       <legend tabindex="-1"><span class="qn">Frage 6</span><span class="qt words">Hättest du Interesse an einer Folgeveranstaltung?</span></legend>
       <div class="opts" data-type="radio" data-name="folge" data-options="Ja|Vielleicht|Nein"></div>
     </fieldset>
@@ -175,7 +175,7 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
       <input type="text" id="themenAnderes" placeholder="Welches Thema?" maxlength="200" hidden aria-label="Anderes Thema">
     </fieldset>
 
-    <fieldset class="step" data-key="format" data-cond="folge" data-auto="1" hidden>
+    <fieldset class="step" data-key="format" data-cond="folge" hidden>
       <legend tabindex="-1"><span class="qn">Frage 8</span><span class="qt words">Welche Form wäre ideal?</span></legend>
       <div class="opts" data-type="radio" data-name="format" data-options="Workshop mit eigenem Laptop|Vortrag wie heute|Kleingruppe im eigenen Verein|Online am Abend"></div>
     </fieldset>
@@ -321,7 +321,6 @@ const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwesVXtgc6xDcC2PhPgG61
     if(s.dataset.key==='themen'){ const o=form.querySelector('input[name="themen"][value="Anderes"]'); otherBox.hidden=!o.checked; if(o.checked && e.target===o) setTimeout(()=>otherBox.focus(),50) }
     if(s.dataset.required) nextBtn.disabled=!isAnswered(s);
     if(s.dataset.key==='folge') renumber();
-    if(s.dataset.auto && e.target.type==='radio'){ clearTimeout(autoT); autoT=setTimeout(()=>{ if(!s.hidden) go(1) }, s.dataset.key==='sterne'?750:420) }
   });
   form.addEventListener('keydown',e=>{
     if(e.key==='Enter' && e.target.tagName==='INPUT' && e.target.type!=='radio' && e.target.type!=='checkbox'){ e.preventDefault(); go(1) }
